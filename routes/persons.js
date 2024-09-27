@@ -43,4 +43,37 @@ router.post("/", (req, res) => {
   res.status(200).json(persons);
 });
 
+//update one person data with PUT method
+router.put("/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  let person = persons.find((person) => person.id === id);
+  console.log(person);
+
+  if (!person) {
+    return res.status(404).json({ message: "user not found" }); // Page not found error
+  }
+
+  //Validation for check name
+  if (!req.body.name) {
+    return res.status(400).json({ msg: "name is required" }); //Bad request error
+  }
+
+  person.name = req.body.name;
+  res.status(200).json(persons);
+});
+
+//delete one person data with DELETE method
+router.delete("/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  let personIndex = persons.findIndex((person) => person.id === id);
+  console.log(personIndex);
+
+  if (personIndex === -1) {
+    return res.status(404).json({ message: "user not found" });
+  }
+
+  persons.splice(personIndex, 1);
+  res.status(200).json(persons);
+});
+
 export default router;

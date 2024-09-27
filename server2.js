@@ -11,11 +11,11 @@ const app = express();
 
 app.use(express.json()); // raw body parser
 app.use(express.urlencoded({ extended: false })); // urlencoded turn to false
+
 // app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/persons", persons); // use /api/persons in url staticly for using all methods by only writing params & query into it at last
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  
 });
